@@ -1,23 +1,37 @@
 import { createCanvas, loadImage } from "canvas";
 import fs from "fs";
+import sharp from "sharp";
 
 const addTextToImage = async (filename: string) => {
-  const img = await loadImage(filename);
-  const base = await loadImage("base.png");
-  console.log(base.width + 120, base.height + 120);
+  // resize is required only for first time
+  //   await sharp("base.png").resize(1000, 420).toFile("resize_base.png");
+  const beforeResize = await loadImage(filename);
+  const toResizeWidth = beforeResize.width - 48;
+  const toResizeHeight = beforeResize.height - 16;
+  const roundedCorners = Buffer.from(
+    `<svg><rect x="0" y="0" width="${toResizeWidth}" height="${toResizeHeight}" rx="16" ry="16"/></svg>`
+  );
+  await sharp(filename)
+    .resize(toResizeWidth, toResizeHeight)
+    .composite([
+      {
+        input: roundedCorners,
+        blend: "dest-in",
+      },
+    ])
+    .toFile("rounded_corner.png");
 
-  const canvas = createCanvas(base.width, base.height);
+  const img = await loadImage("rounded_corner.png");
+  const base = await loadImage("resize_base.png");
+
+  const canvas = createCanvas(1000, 420);
   const ctx = canvas.getContext("2d");
 
   ctx.drawImage(base, 0, 0);
-  ctx.drawImage(img, 0, 0);
-  ctx.font = "46px Arial";
+  ctx.drawImage(img, 0, 230);
+  ctx.font = "24px Arial";
   ctx.fillStyle = "white";
-  ctx.fillText(
-    "(This GitHub contribution chart updated in realtime)",
-    1024,
-    60
-  );
+  ctx.fillText("(The GitHub contribution chart updated in realtime*)", 0, 60);
   // save canvas image as png
   const out = fs.createWriteStream(__dirname + "/test.png");
   const stream = canvas.createPNGStream();

@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node dist/index.js",
     "watch": "tsc -w",
-    "dev": "nodemon dist/index.js"
+    "dev": "nodemon dist/index.js",
+    "utilsDev": "nodemon dist/imageUtils.js"
   },
   "dependencies": {
+    "canvas": "^2.8.0",
     "puppeteer": "^10.4.0"
   },
   "devDependencies": {

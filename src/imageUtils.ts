@@ -2,7 +2,7 @@ import { createCanvas, loadImage } from "canvas";
 import fs from "fs";
 import sharp from "sharp";
 
-const addTextToImage = async (filename: string) => {
+export const addTextToImage = async (filename: string) => {
   // resize is required only for first time
   //   await sharp("base.png").resize(1000, 420).toFile("resize_base.png");
   const beforeResize = await loadImage(filename);
@@ -31,12 +31,12 @@ const addTextToImage = async (filename: string) => {
   ctx.drawImage(img, 0, 230);
   ctx.font = "24px Arial";
   ctx.fillStyle = "white";
-  ctx.fillText("(The GitHub contribution chart updated in realtime*)", 0, 60);
+  ctx.fillText("(The GitHub contribution chart updated in realtime *)", 0, 60);
   // save canvas image as png
-  const out = fs.createWriteStream(__dirname + "/test.png");
+  const out = fs.createWriteStream("./final.png");
   const stream = canvas.createPNGStream();
   stream.pipe(out);
   out.on("finish", () => console.log("The PNG file was created."));
 };
 
-addTextToImage("contributions.png");
+// addTextToImage("contributions.png");

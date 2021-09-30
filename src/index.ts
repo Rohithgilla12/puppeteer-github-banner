@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+import { addTextToImage } from "./imageUtils";
 
 const GITHUB_USERNAME = "Rohithgilla12";
 
@@ -46,7 +47,13 @@ const main = async () => {
 
   await browser.close();
 
-  console.log("Done");
+  console.log("Done creating the screenshot");
+
+  await addTextToImage("contributions.png");
+
+  console.log("Done editing the screenshot");
+
+  // upload image on dev.to
 };
 
 main();

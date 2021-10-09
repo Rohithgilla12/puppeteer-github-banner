@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 import puppeteer from "puppeteer";
 import { addTextToImage } from "./imageUtils";
 

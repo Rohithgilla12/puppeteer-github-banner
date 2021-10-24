@@ -69,7 +69,7 @@ const main = async () => {
 
     console.log("Done editing the screenshot!");
 
-    const name = "final.png";
+    const name = "final";
 
     const base64 = fs.readFileSync(`${name}.png`, { encoding: "base64" });
 

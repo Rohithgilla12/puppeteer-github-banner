@@ -19,7 +19,9 @@ const main = async () => {
   const page = await browser.newPage();
   await page.setViewport({ width: 1000, height: 800, deviceScaleFactor: 1 });
 
-  await page.goto(`https://github.com/${GITHUB_USERNAME}`);
+  await page.goto(`https://github.com/${GITHUB_USERNAME}`, {
+    waitUntil: "networkidle2",
+  });
 
   // Dark Mode
   await page.emulateMediaFeatures([

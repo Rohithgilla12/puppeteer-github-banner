@@ -53,7 +53,7 @@ const main = async () => {
 
   await addTextToImage("contributions.png");
 
-  console.log("Done editing the screenshot");
+  console.log("Done editing the screenshot!");
 };
 
 main();

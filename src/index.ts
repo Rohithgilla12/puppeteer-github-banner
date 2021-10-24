@@ -3,12 +3,16 @@ import { addTextToImage } from "./imageUtils";
 import fs from "fs";
 const TwitterV1 = require("twitter");
 
+require("dotenv").config();
+
 const credentials = {
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
   access_token_key: process.env.ACCESS_TOKEN,
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 };
+
+console.log(credentials);
 
 const clientV1 = new TwitterV1(credentials);
 
@@ -98,4 +102,4 @@ const main = async () => {
 main();
 setInterval(() => {
   main();
-}, 12000);
+}, 100 * 6 * 10);

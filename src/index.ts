@@ -13,7 +13,9 @@ const CONTRIBUTION_SELECTOR =
   "#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div:nth-child(2) > div > div.mt-4.position-relative > div > div.col-12.col-lg-10 > div.js-yearly-contributions > div:nth-child(1) > h2";
 
 const main = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   await page.setViewport({ width: 1000, height: 800, deviceScaleFactor: 1 });
 
@@ -52,8 +54,6 @@ const main = async () => {
   await addTextToImage("contributions.png");
 
   console.log("Done editing the screenshot");
-
-  // upload image on dev.to
 };
 
 main();

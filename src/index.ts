@@ -75,7 +75,9 @@ const main = async () => {
 
     const name = "final";
 
-    const base64 = fs.readFileSync(`${name}.png`, { encoding: "base64" });
+    const base64 = fs.readFileSync(__dirname + `/../${name}.png`, {
+      encoding: "base64",
+    });
 
     clientV1.post(
       "account/update_profile_banner",

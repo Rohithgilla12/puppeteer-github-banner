@@ -32,7 +32,7 @@ const main = async () => {
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
-    await page.setViewport({ width: 1000, height: 800, deviceScaleFactor: 2 });
+    await page.setViewport({ width: 1000, height: 800, deviceScaleFactor: 1 });
 
     await page.goto(`https://github.com/${GITHUB_USERNAME}`, {
       waitUntil: "networkidle2",

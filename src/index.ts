@@ -74,16 +74,10 @@ const main = async () => {
       {
         banner: base64.toString("base64"),
       },
-      (err: any, data: any, response: { toJSON: () => any }) => {
+      (err: any, _data: any, response: { toJSON: () => any }) => {
         console.log("err", err);
         const json = response.toJSON();
         console.log(json.statusCode, json.headers, json.body);
-
-        try {
-          console.log(data);
-        } catch (e) {
-          console.log(e);
-        }
       }
     );
   } catch (e) {

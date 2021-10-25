@@ -34,5 +34,3 @@ export const addTextToImage = async (filename: string) => {
 
   return canvas.toBuffer();
 };
-
-// addTextToImage("contributions.png");

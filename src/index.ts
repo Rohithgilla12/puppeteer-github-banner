@@ -11,8 +11,6 @@ const credentials = {
   access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 };
 
-console.log(credentials);
-
 const clientV1 = new TwitterV1(credentials);
 
 const GITHUB_USERNAME = "Rohithgilla12";

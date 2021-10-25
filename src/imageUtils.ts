@@ -1,5 +1,4 @@
 import { createCanvas, loadImage } from "canvas";
-import fs from "fs";
 import sharp from "sharp";
 
 export const addTextToImage = async (filename: string) => {
@@ -19,10 +18,10 @@ export const addTextToImage = async (filename: string) => {
         blend: "dest-in",
       },
     ])
-    .toFile("rounded_corner.png");
+    .toFile(__dirname + `/../rounded_corner.png`);
 
-  const img = await loadImage("rounded_corner.png");
-  const base = await loadImage("resize_base.png");
+  const img = await loadImage(__dirname + `/../rounded_corner.png`);
+  const base = await loadImage(__dirname + `/../resize_base.png`);
 
   const canvas = createCanvas(1000, 420);
   const ctx = canvas.getContext("2d");
@@ -32,11 +31,8 @@ export const addTextToImage = async (filename: string) => {
   ctx.font = "24px Arial";
   ctx.fillStyle = "white";
   ctx.fillText("(The GitHub contribution chart updated in realtime *)", 0, 60);
-  // save canvas image as png
-  const out = fs.createWriteStream("./final.png");
-  const stream = canvas.createPNGStream();
-  stream.pipe(out);
-  out.on("finish", () => console.log("The PNG file was created."));
+
+  return canvas.toBuffer();
 };
 
 // addTextToImage("contributions.png");

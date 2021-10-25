@@ -1,6 +1,5 @@
 import puppeteer from "puppeteer";
 import { addTextToImage } from "./imageUtils";
-import fs from "fs";
 const TwitterV1 = require("twitter");
 
 require("dotenv").config();
@@ -69,20 +68,13 @@ const main = async () => {
 
     console.log("Done creating the screenshot");
 
-    await addTextToImage("contributions.png");
-
+    const base64 = await addTextToImage(__dirname + `/../contributions.png`);
     console.log("Done editing the screenshot!");
-
-    const name = "final";
-
-    const base64 = fs.readFileSync(__dirname + `/../${name}.png`, {
-      encoding: "base64",
-    });
 
     clientV1.post(
       "account/update_profile_banner",
       {
-        banner: base64,
+        banner: base64.toString("base64"),
       },
       (err: any, data: any, response: { toJSON: () => any }) => {
         console.log("err", err);

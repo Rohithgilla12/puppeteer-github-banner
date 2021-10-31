@@ -15,8 +15,11 @@ const clientV1 = new TwitterV1(credentials);
 
 const GITHUB_USERNAME = "Rohithgilla12";
 
-const GITHUB_CONTRIBUTION_SELECTOR =
-  "#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div:nth-child(2) > div > div.mt-4.position-relative > div > div.col-12.col-lg-10 > div.js-yearly-contributions > div:nth-child(1)";
+// const GITHUB_CONTRIBUTION_SELECTOR =
+//   "#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div:nth-child(2) > div > div.mt-4.position-relative > div > div.col-12.col-lg-10 > div.js-yearly-contributions > div:nth-child(1)";
+
+const GITHUB_HALOWEEN_SELECTOR =
+  "#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.Layout-main > div:nth-child(2) > div > div.mt-4.position-relative > div > div.col-12.col-lg-10 > div.js-yearly-contributions.ic-squares > div:nth-child(1)";
 
 const REMOVE_SELECTOR =
   "#js-pjax-container > div.container-xl.px-3.px-md-4.px-lg-5 > div > div.flex-shrink-0.col-12.col-md-9.mb-4.mb-md-0 > div:nth-child(2) > div > div.mt-4.position-relative > div > div.col-12.col-lg-10 > div.js-yearly-contributions > div:nth-child(1) > div > div > div > div.float-left";
@@ -43,7 +46,7 @@ const main = async () => {
         value: "dark",
       },
     ]);
-    await page.waitForSelector(GITHUB_CONTRIBUTION_SELECTOR);
+    await page.waitForSelector(GITHUB_HALOWEEN_SELECTOR);
 
     // puppeteer hide the selected element
     await page.evaluate((selector) => {
@@ -57,7 +60,7 @@ const main = async () => {
       element.style.paddingTop = "16px";
     }, CONTRIBUTION_SELECTOR);
 
-    const element = await page.$(GITHUB_CONTRIBUTION_SELECTOR);
+    const element = await page.$(GITHUB_HALOWEEN_SELECTOR);
     if (element) {
       await element.screenshot({ path: "contributions.png" });
     }
